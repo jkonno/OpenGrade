@@ -3,14 +3,12 @@
 
 By Pat
 
+Modified by nut (Juho K 22.7.2020)
+
 
 ------
 
-Install the original opengrade from Github the replace the OpenGrade.exe with this in this folder
-
-plug the arduino in the AutoSteer port
-
-
+This is with the blade control edited into the UI and also connected to the machine port instead.
 
 
 Modifications in soure code:
@@ -34,18 +32,6 @@ interface:
 use value from push to zero btnZeroAltitude
 make button on and off make "cboxLaserModeOnOff" from "cboxRecLastOnOff"
 
-code :
+A new INO file with both propo control and also on/off valve control included.
 
-in "OpenGL.Designer.cs line 415
-
-if (cboxLaserModeOnOff.Checked)
-
-//in cm
-cutDelta = (pn.altitude - ct.zeroAltitude)*100
-else
-
-
-to change distance from line to use valve/lightbar
-
-in OpenGL.Designer.cs line 526:
-if (minDist < 9000) // original number is 15(3.9 meter). meter2 form the line, For 5 meter put 25.9000 is 95 meters
+Arduino is sending back up/down status and current cutValue, or in propomode up/down signal and PWM value
