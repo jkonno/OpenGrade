@@ -145,6 +145,7 @@
             this.btnZeroAltitude = new System.Windows.Forms.Button();
             this.cboxLastPass = new System.Windows.Forms.CheckBox();
             this.cboxRecLastOnOff = new System.Windows.Forms.CheckBox();
+            this.cboxLaserModeOnOff = new System.Windows.Forms.CheckBox();
             this.btnClearLastPass = new System.Windows.Forms.Button();
             this.lblDrawSlope = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -1349,6 +1350,7 @@
             this.controlPage2.Controls.Add(this.btnZeroAltitude);
             this.controlPage2.Controls.Add(this.cboxLastPass);
             this.controlPage2.Controls.Add(this.cboxRecLastOnOff);
+            this.controlPage2.Controls.Add(this.cboxLaserModeOnOff);
             this.controlPage2.Controls.Add(this.btnClearLastPass);
             this.controlPage2.ImageIndex = 2;
             this.controlPage2.Location = new System.Drawing.Point(4, 4);
@@ -1404,7 +1406,7 @@
             this.cboxLastPass.BackColor = System.Drawing.Color.Transparent;
             this.cboxLastPass.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxLastPass.Image = global::OpenGrade.Properties.Resources.LastPassOnOff;
-            this.cboxLastPass.Location = new System.Drawing.Point(91, 23);
+            this.cboxLastPass.Location = new System.Drawing.Point(240, 23);
             this.cboxLastPass.Name = "cboxLastPass";
             this.cboxLastPass.Size = new System.Drawing.Size(90, 90);
             this.cboxLastPass.TabIndex = 221;
@@ -1418,12 +1420,26 @@
             this.cboxRecLastOnOff.BackColor = System.Drawing.Color.Transparent;
             this.cboxRecLastOnOff.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxRecLastOnOff.Image = global::OpenGrade.Properties.Resources.BoundaryRecord;
-            this.cboxRecLastOnOff.Location = new System.Drawing.Point(240, 23);
+            this.cboxRecLastOnOff.Location = new System.Drawing.Point(350, 23);
             this.cboxRecLastOnOff.Name = "cboxRecLastOnOff";
             this.cboxRecLastOnOff.Size = new System.Drawing.Size(90, 90);
             this.cboxRecLastOnOff.TabIndex = 222;
             this.cboxRecLastOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxRecLastOnOff.UseVisualStyleBackColor = false;
+            // 
+            // cboxLaserModeOnOff
+            // 
+            this.cboxLaserModeOnOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxLaserModeOnOff.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cboxLaserModeOnOff.BackColor = System.Drawing.Color.Transparent;
+            this.cboxLaserModeOnOff.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboxLaserModeOnOff.Image = global::OpenGrade.Properties.Resources.LaserMode;
+            this.cboxLaserModeOnOff.Location = new System.Drawing.Point(60, 23);
+            this.cboxLaserModeOnOff.Name = "cboxLaserModeOnOff";
+            this.cboxLaserModeOnOff.Size = new System.Drawing.Size(126, 90);
+            this.cboxLaserModeOnOff.TabIndex = 242;
+            this.cboxLaserModeOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cboxLaserModeOnOff.UseVisualStyleBackColor = false;
             // 
             // btnClearLastPass
             // 
@@ -1432,7 +1448,7 @@
             this.btnClearLastPass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClearLastPass.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearLastPass.Image = global::OpenGrade.Properties.Resources.LastPassClear;
-            this.btnClearLastPass.Location = new System.Drawing.Point(380, 24);
+            this.btnClearLastPass.Location = new System.Drawing.Point(460, 24);
             this.btnClearLastPass.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.btnClearLastPass.Name = "btnClearLastPass";
             this.btnClearLastPass.Size = new System.Drawing.Size(90, 90);
@@ -2173,6 +2189,7 @@
         private System.Windows.Forms.Button btnZeroAltitude;
         private System.Windows.Forms.TabPage controlPage2;
         private System.Windows.Forms.CheckBox cboxRecLastOnOff;
+        private System.Windows.Forms.CheckBox cboxLaserModeOnOff;
         private System.Windows.Forms.Button btnGoogleEarth;
         private ProgBar.ProgBarPlus pbarCutBelow;
         private ProgBar.ProgBarPlus pbarCutAbove;

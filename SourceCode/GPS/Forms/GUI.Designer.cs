@@ -15,6 +15,8 @@ namespace OpenGrade
 {
     public partial class FormGPS
     {
+       
+
         private void LoadGUI()
         {
             //set the flag mark button to red dot
@@ -208,6 +210,7 @@ namespace OpenGrade
 
                     cboxLastPass.Checked = false;
                     cboxRecLastOnOff.Checked = false;
+                    cboxLaserModeOnOff.Checked = false;
                     btnDoneDraw.Enabled = false;
                     btnDeleteLastPoint.Enabled = false;
                     btnStartDraw.Enabled = false;
@@ -1091,12 +1094,41 @@ namespace OpenGrade
                     lblCutDelta.BackColor = Color.Lavender;
                     pbarCutAbove.Value = 0;
                     pbarCutBelow.Value = 0;
+
+                    //Output to serial for blade control 
+                    mc.relayRateData[mc.cutValve] = (byte)(100);
+                    RateRelayOutToPort();
+
+                    //
                 }
                 else
-                {
+                {   if (cutDelta < -9.9) //par Pat
+
+                    {
+                        mc.relayRateData[mc.cutValve] = (byte)(1);
+                        RateRelayOutToPort();
+                    }
+                    else
+                    {
+                        if (cutDelta > 9.9)
+                        {
+                            mc.relayRateData[mc.cutValve] = (byte)(199);
+                            RateRelayOutToPort();
+                        }
+                        else
+                        {
+                            mc.relayRateData[mc.cutValve] = (byte)((cutDelta * 10) + 100);
+                            RateRelayOutToPort();
+                        }
+                    }
+
+
+
+
                     if (isMetric)  //metric or imperial
                     {
                         lblCutDelta.Text = cutDelta.ToString("N1");
+                        
                     }
                     else
                     {
@@ -1136,6 +1168,10 @@ namespace OpenGrade
             //wait till timer fires again.     
         }
 
-
+        //public void RateRelayOutToPort() // par pat
+        //{  
+            
+            //throw new NotImplementedException(); // par pat
+        //}
     }//end class
 }//end namespace

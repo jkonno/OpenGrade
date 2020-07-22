@@ -1,0 +1,64 @@
+FormGPS.cs
+
+pbarCutAbove ProgBarPlus
+pbarCutBelow ProgBarPlus
+
+
+ //progress bar "buttons" for gain
+        private void pbarCutAbove_Click(object sender, EventArgs e)
+        {
+            barGraphMax++;
+            lblBarGraphMax.Text = barGraphMax.ToString();
+
+        }
+
+        private void pbarCutBelow_Click(object sender, EventArgs e)
+        {
+            if (barGraphMax-- < 1.99) barGraphMax = 1;
+            lblBarGraphMax.Text = barGraphMax.ToString();
+        }
+
+
+
+
+in OpenGL.Designer.cs line 15
+ //difference between blade tip and guide line
+        public double cutDelta;
+        private double minDist;
+
+cutDelta double FormGPS.cutDelta
+minDist double FormGPS.minDist
+
+si cutDelta n'a rien = 9999
+est en cm?
+
+sortie: RateRelayOutToPort/ no not anymore
+
+----------------------------------------------
+
+ //fill up0 the auto steer array with new values
+                mc.relayRateData[mc.sdSpeed] = (byte)(pn.speed * 4.0);
+
+                //out serial to autosteer module  //indivdual classes load the distance and heading deltas 
+                AutoSteerDataOutToPort();
+                
+                SendUDPMessage(guidanceLineSteerAngle + "," + guidanceLineDistanceOff);
+
+
+
+
+
+
+
+
+
+
+sortieValve etait la valeur a envoyer a arduino, est cutValve maintenant
+
+
+Ceiling 	Returns the smallest integral value that's greater than or equal to the specified Decimal or Double.
+
+txtBoxSendArduino
+
+---------------------------------
+ 

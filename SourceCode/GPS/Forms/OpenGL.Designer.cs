@@ -412,9 +412,18 @@ namespace OpenGrade
             int ptCnt = ct.ptList.Count;
             gl.LineWidth(4);
 
+
+            if (cboxLaserModeOnOff.Checked)
+            {
+
+                cutDelta = (pn.altitude - ct.zeroAltitude) * 100;
+
+            }
+
+
             if (ptCnt > 0)
             {
-                minDist = 1000000;
+                minDist = 1000000; //original is 1000000
                 int ptCount = ct.ptList.Count-1;
 
                 //find the closest point to current fix
@@ -514,7 +523,7 @@ namespace OpenGrade
                     }
                 }
 
-                if (minDist < 15)
+                if (minDist < 9000) // original is 15 meter form the line scare, for 5 meter put 25
                 {
                     //draw the actual elevation lines and blade
                     gl.LineWidth(8);
@@ -560,15 +569,30 @@ namespace OpenGrade
                     gl.Vertex(closestPoint, (((pn.altitude - centerY) * altitudeWindowGain) + centerY), 0);
                     gl.End();
 
-                    //calculate blade to guideline delta
-                    //double temp = (double)closestPoint / (double)count2;
+                
+
+            
+                //calculate blade to guideline delta
+                //double temp = (double)closestPoint / (double)count2;
+                if (cboxLaserModeOnOff.Checked)
+                {
+
+                cutDelta = (pn.altitude - ct.zeroAltitude) * 100;
+
+                }
+                else
+                {
                     if (ct.ptList[closestPoint].cutAltitude > 0)
                     {
-                        //in cm
-                        cutDelta = (pn.altitude - ct.ptList[closestPoint].cutAltitude)*100;
+                     //in cm
+                    cutDelta = (pn.altitude - ct.ptList[closestPoint].cutAltitude)*100;
                     }
                 }
+                }
             }
+
+
+
         }
 
         private void openGLControlBack_MouseMove(object sender, MouseEventArgs e)
