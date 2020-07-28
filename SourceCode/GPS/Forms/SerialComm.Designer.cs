@@ -180,8 +180,8 @@ namespace OpenGrade
         #region RelaySerialPort //--------------------------------------------------------------------
 
         //Send relay info out to relay board
-        public void RateRelayOutToPort()
-		//public void RateRelayOutToPort(byte[] items, int numItems)
+        public void RateRelayDataOutToPort()
+        //public void RateRelayOutToPort(byte[] items, int numItems)
         {
             //Tell Arduino to turn section on or off accordingly
             if (spRelay.IsOpen)
@@ -190,6 +190,22 @@ namespace OpenGrade
                 catch (Exception e)
                 {
                     WriteErrorLog("Out to Section relays" + e.ToString());
+                    SerialPortRateRelayClose();
+                }
+            }
+        }
+
+        // RateRelaySettingsOutToPort added By Pat
+        public void RateRelaySettingsOutToPort()
+        //public void RateRelayOutToPort(byte[] items, int numItems)
+        {
+            //Tell Arduino to turn section on or off accordingly
+            if (spRelay.IsOpen)
+            {
+                try { spRelay.Write(mc.relayRateSettings, 0, CModuleComm.numRelayRateSettingsItems); } //try { spRelay.Write(items, 0, numItems ); }   Pat
+                catch (Exception e)
+                {
+                    WriteErrorLog("Out Settings to Section relays" + e.ToString());
                     SerialPortRateRelayClose();
                 }
             }

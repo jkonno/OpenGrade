@@ -26,6 +26,16 @@ namespace OpenGrade
         public double maxSteerAngle;
         public double maxAngularVelocity;
 
+        //Valve Settings
+        public byte pwmGainUp;
+        public byte pwmGainDown;
+        public byte pwmMinUp;
+        public byte pwmMinDown;
+        public byte pwmMaxUp;
+        public byte pwmMaxDown;
+        public byte integralMultiplier;
+        public byte deadband;
+
         public CVehicle(OpenGL _gl, FormGPS _f)
         {
             //constructor

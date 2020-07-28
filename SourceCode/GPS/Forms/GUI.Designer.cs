@@ -1097,7 +1097,7 @@ namespace OpenGrade
 
                     //Output to serial for blade control 
                     mc.relayRateData[mc.cutValve] = (byte)(100);
-                    RateRelayOutToPort();
+                    RateRelayDataOutToPort();
 
                     //
                 }
@@ -1106,19 +1106,19 @@ namespace OpenGrade
 
                     {
                         mc.relayRateData[mc.cutValve] = (byte)(1);
-                        RateRelayOutToPort();
+                        RateRelayDataOutToPort();
                     }
                     else
                     {
                         if (cutDelta > 9.9)
                         {
                             mc.relayRateData[mc.cutValve] = (byte)(199);
-                            RateRelayOutToPort();
+                            RateRelayDataOutToPort();
                         }
                         else
                         {
                             mc.relayRateData[mc.cutValve] = (byte)((cutDelta * 10) + 100);
-                            RateRelayOutToPort();
+                            RateRelayDataOutToPort();
                         }
                     }
 

@@ -45,6 +45,24 @@
             this.label18 = new System.Windows.Forms.Label();
             this.nudAntennaHeight = new System.Windows.Forms.NumericUpDown();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.tabValve = new System.Windows.Forms.TabPage();
+            this.bntValveSettingsSend = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudPwmMinUp = new System.Windows.Forms.NumericUpDown();
+            this.nudPwmGainUp = new System.Windows.Forms.NumericUpDown();
+            this.nudPwmMaxUp = new System.Windows.Forms.NumericUpDown();
+            this.nudDeadband = new System.Windows.Forms.NumericUpDown();
+            this.nudIntegralMultiplier = new System.Windows.Forms.NumericUpDown();
+            this.nudPwmMaxDown = new System.Windows.Forms.NumericUpDown();
+            this.nudPwmGainDown = new System.Windows.Forms.NumericUpDown();
+            this.nudPwmMinDown = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.lblInchesCm = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -54,6 +72,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMinSlope)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudToolWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaHeight)).BeginInit();
+            this.tabValve.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMinUp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmGainUp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMaxUp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDeadband)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIntegralMultiplier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMaxDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmGainDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMinDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -61,6 +88,7 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabVehicle);
             this.tabControl1.Controls.Add(this.tabDisplay);
+            this.tabControl1.Controls.Add(this.tabValve);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -209,6 +237,209 @@
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.UseVisualStyleBackColor = true;
             // 
+            // tabValve
+            // 
+            this.tabValve.Controls.Add(this.bntValveSettingsSend);
+            this.tabValve.Controls.Add(this.label11);
+            this.tabValve.Controls.Add(this.label10);
+            this.tabValve.Controls.Add(this.label9);
+            this.tabValve.Controls.Add(this.label8);
+            this.tabValve.Controls.Add(this.label7);
+            this.tabValve.Controls.Add(this.label6);
+            this.tabValve.Controls.Add(this.nudPwmMinUp);
+            this.tabValve.Controls.Add(this.nudPwmGainUp);
+            this.tabValve.Controls.Add(this.nudPwmMaxUp);
+            this.tabValve.Controls.Add(this.nudDeadband);
+            this.tabValve.Controls.Add(this.nudIntegralMultiplier);
+            this.tabValve.Controls.Add(this.nudPwmMaxDown);
+            this.tabValve.Controls.Add(this.nudPwmGainDown);
+            this.tabValve.Controls.Add(this.nudPwmMinDown);
+            this.tabValve.Controls.Add(this.label4);
+            this.tabValve.Controls.Add(this.label3);
+            resources.ApplyResources(this.tabValve, "tabValve");
+            this.tabValve.Name = "tabValve";
+            this.tabValve.UseVisualStyleBackColor = true;
+            // 
+            // bntValveSettingsSend
+            // 
+            resources.ApplyResources(this.bntValveSettingsSend, "bntValveSettingsSend");
+            this.bntValveSettingsSend.Name = "bntValveSettingsSend";
+            this.bntValveSettingsSend.UseVisualStyleBackColor = true;
+            this.bntValveSettingsSend.Click += new System.EventHandler(this.bntValveSettingsSend_Click);
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // nudPwmMinUp
+            // 
+            resources.ApplyResources(this.nudPwmMinUp, "nudPwmMinUp");
+            this.nudPwmMinUp.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudPwmMinUp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPwmMinUp.Name = "nudPwmMinUp";
+            this.nudPwmMinUp.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudPwmMinUp.ValueChanged += new System.EventHandler(this.nudPwmMinUp_ValueChanged);
+            // 
+            // nudPwmGainUp
+            // 
+            resources.ApplyResources(this.nudPwmGainUp, "nudPwmGainUp");
+            this.nudPwmGainUp.Name = "nudPwmGainUp";
+            this.nudPwmGainUp.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudPwmGainUp.ValueChanged += new System.EventHandler(this.nudPwmGainUp_ValueChanged);
+            // 
+            // nudPwmMaxUp
+            // 
+            resources.ApplyResources(this.nudPwmMaxUp, "nudPwmMaxUp");
+            this.nudPwmMaxUp.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudPwmMaxUp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPwmMaxUp.Name = "nudPwmMaxUp";
+            this.nudPwmMaxUp.Value = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.nudPwmMaxUp.ValueChanged += new System.EventHandler(this.nudPwmMaxUp_ValueChanged);
+            // 
+            // nudDeadband
+            // 
+            resources.ApplyResources(this.nudDeadband, "nudDeadband");
+            this.nudDeadband.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudDeadband.Name = "nudDeadband";
+            this.nudDeadband.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudDeadband.ValueChanged += new System.EventHandler(this.nudDeadband_ValueChanged);
+            // 
+            // nudIntegralMultiplier
+            // 
+            resources.ApplyResources(this.nudIntegralMultiplier, "nudIntegralMultiplier");
+            this.nudIntegralMultiplier.Name = "nudIntegralMultiplier";
+            this.nudIntegralMultiplier.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudIntegralMultiplier.ValueChanged += new System.EventHandler(this.nudIntegralMultiplier_ValueChanged);
+            // 
+            // nudPwmMaxDown
+            // 
+            resources.ApplyResources(this.nudPwmMaxDown, "nudPwmMaxDown");
+            this.nudPwmMaxDown.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudPwmMaxDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPwmMaxDown.Name = "nudPwmMaxDown";
+            this.nudPwmMaxDown.Value = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.nudPwmMaxDown.ValueChanged += new System.EventHandler(this.nudPwmMaxDown_ValueChanged);
+            // 
+            // nudPwmGainDown
+            // 
+            resources.ApplyResources(this.nudPwmGainDown, "nudPwmGainDown");
+            this.nudPwmGainDown.Name = "nudPwmGainDown";
+            this.nudPwmGainDown.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudPwmGainDown.ValueChanged += new System.EventHandler(this.nudPwmGainDown_ValueChanged);
+            // 
+            // nudPwmMinDown
+            // 
+            resources.ApplyResources(this.nudPwmMinDown, "nudPwmMinDown");
+            this.nudPwmMinDown.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudPwmMinDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPwmMinDown.Name = "nudPwmMinDown";
+            this.nudPwmMinDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudPwmMinDown.ValueChanged += new System.EventHandler(this.nudPwmMinDown_ValueChanged);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
@@ -258,6 +489,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMinSlope)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudToolWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaHeight)).EndInit();
+            this.tabValve.ResumeLayout(false);
+            this.tabValve.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMinUp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmGainUp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMaxUp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDeadband)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIntegralMultiplier)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMaxDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmGainDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwmMinDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,5 +526,23 @@
         private System.Windows.Forms.NumericUpDown nudAntennaHeight;
         private System.Windows.Forms.NumericUpDown nudMinSlope;
         private System.Windows.Forms.NumericUpDown nudToolWidth;
+        private System.Windows.Forms.TabPage tabValve;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudPwmMinDown;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown nudPwmMinUp;
+        private System.Windows.Forms.NumericUpDown nudPwmGainUp;
+        private System.Windows.Forms.NumericUpDown nudPwmMaxUp;
+        private System.Windows.Forms.NumericUpDown nudDeadband;
+        private System.Windows.Forms.NumericUpDown nudIntegralMultiplier;
+        private System.Windows.Forms.NumericUpDown nudPwmMaxDown;
+        private System.Windows.Forms.NumericUpDown nudPwmGainDown;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button bntValveSettingsSend;
     }
 }

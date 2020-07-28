@@ -18,10 +18,10 @@ namespace OpenGrade
         public int rdHeaderHi, rdHeaderLo = 1, cutValve = 2; // rdYouTurnControlByte = 6
 
         // PGN - 32760 - 127.248
-        public static int numRelayRateSettingsItems = 6;
+        public static int numRelayRateSettingsItems = 10;
         public byte[] relayRateSettings = new byte[numRelayRateSettingsItems];
-        public int rsHeaderHi, rsHeaderLo = 1, rsAccumulatedVolumeHi = 2, rsAccumulatedVolumeLo = 3,
-            rsFlowCalFactorHi = 4, rsFlowCalFactorLo = 5;
+        public int rsHeaderHi, rsHeaderLo = 1, rsPwmGainUp = 2, rsPwmGainDown = 3,
+            rsPwmMinUp = 4, rsPwmMinDown = 5, rsPwmMaxUp = 6, rsPwmMaxDown = 7, rsIntegralMultiplier = 8, rsDeadband = 9;
 
         //AutoSteer ------------------------------------------------------------------------------------------------
         public string serialRecvAutoSteerStr;
@@ -66,7 +66,19 @@ namespace OpenGrade
             relayRateData[rdHeaderHi] = 127; // PGN - 32762
             relayRateData[rdHeaderLo] = 250; 
             relayRateData[cutValve] = 101;
-            mf.RateRelayOutToPort(); // etait mf.RateRelayOutToPort(relayRateData, numRelayRateDataItems);
+            mf.RateRelayDataOutToPort(); // etait mf.RateRelayOutToPort(relayRateData, numRelayRateDataItems);
+
+            relayRateSettings[rsHeaderHi] = 127; // PGN - 32760 Added by Pat
+            relayRateSettings[rsHeaderLo] = 248;
+            relayRateSettings[rsPwmGainUp] = Properties.Vehicle.Default.setVehicle_pwmGainUp;
+            relayRateSettings[rsPwmGainDown] = Properties.Vehicle.Default.setVehicle_pwmGainDown;
+            relayRateSettings[rsPwmMinUp] = Properties.Vehicle.Default.setVehicle_pwmMinUp;
+            relayRateSettings[rsPwmMinDown] = Properties.Vehicle.Default.setVehicle_pwmMinDown;
+            relayRateSettings[rsPwmMaxUp] = Properties.Vehicle.Default.setVehicle_pwmMaxUp;
+            relayRateSettings[rsPwmMaxDown] = Properties.Vehicle.Default.setVehicle_pwmMaxDown;
+            relayRateSettings[rsIntegralMultiplier] = Properties.Vehicle.Default.setVehicle_integralMultiplier;
+            relayRateSettings[rsDeadband] = Properties.Vehicle.Default.setVehicle_deadband;
+            mf.RateRelaySettingsOutToPort();
 
             autoSteerData[sdHeaderHi] = 127; // PGN - 32766
             autoSteerData[sdHeaderLo] = (254);

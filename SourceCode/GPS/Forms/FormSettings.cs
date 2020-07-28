@@ -12,6 +12,7 @@ namespace OpenGrade
         private readonly FormGPS mf = null;
 
         private double antennaHeight, minSlope, toolWidth;
+        private byte PwmGainUp, PwmGainDown, PwmMaxUp, PwmMaxDown, PwmMinUp, PwmMinDown, IntegralMultiplier, Deadband;
         private readonly double metImp2m, m2MetImp;
 
         //constructor
@@ -56,7 +57,55 @@ namespace OpenGrade
             nudMinSlope.ValueChanged -= nudMinSlope_ValueChanged;
             nudMinSlope.Value = (decimal)(minSlope);
             nudMinSlope.ValueChanged += nudMinSlope_ValueChanged;
+
+            //Valve settings to what it is in the settings page------------------------------------------------
+            //PwmMinDown = Properties.Vehicle.Default.setVehicle_antennaHeight;
+            //toolWidth = Properties.Vehicle.Default.setVehicle_toolWidth;
+            //minSlope = Properties.Vehicle.Default.setVehicle_minSlope * 100;
+
+            PwmMinUp = Properties.Vehicle.Default.setVehicle_pwmMinUp;
+            PwmMinDown = Properties.Vehicle.Default.setVehicle_pwmMinDown;
+            PwmMaxUp = Properties.Vehicle.Default.setVehicle_pwmMaxUp;
+            PwmMaxDown = Properties.Vehicle.Default.setVehicle_pwmMaxDown;
+            PwmGainUp = Properties.Vehicle.Default.setVehicle_pwmGainUp;
+            PwmGainDown = Properties.Vehicle.Default.setVehicle_pwmGainDown;
+            IntegralMultiplier = Properties.Vehicle.Default.setVehicle_integralMultiplier;
+            Deadband = Properties.Vehicle.Default.setVehicle_deadband;
+
+            nudPwmMinDown.ValueChanged -= nudPwmMinDown_ValueChanged;
+            nudPwmMinDown.Value = PwmMinDown;
+            nudPwmMinDown.ValueChanged += nudPwmMinDown_ValueChanged;
+
+            nudPwmMaxDown.ValueChanged -= nudPwmMaxDown_ValueChanged;
+            nudPwmMaxDown.Value = PwmMaxDown;
+            nudPwmMaxDown.ValueChanged += nudPwmMaxDown_ValueChanged;
+
+            nudPwmGainDown.ValueChanged -= nudPwmGainDown_ValueChanged;
+            nudPwmGainDown.Value = PwmGainDown;
+            nudPwmGainDown.ValueChanged += nudPwmGainDown_ValueChanged;
+
+            nudPwmMinUp.ValueChanged -= nudPwmMinUp_ValueChanged;
+            nudPwmMinUp.Value = PwmMinUp;
+            nudPwmMinUp.ValueChanged += nudPwmMinUp_ValueChanged;
+
+            nudPwmMaxUp.ValueChanged -= nudPwmMaxUp_ValueChanged;
+            nudPwmMaxUp.Value = PwmMaxUp;
+            nudPwmMaxUp.ValueChanged += nudPwmMaxUp_ValueChanged;
+
+            nudPwmGainUp.ValueChanged -= nudPwmGainUp_ValueChanged;
+            nudPwmGainUp.Value = PwmGainUp;
+            nudPwmGainUp.ValueChanged += nudPwmGainUp_ValueChanged;
+
+            nudIntegralMultiplier.ValueChanged -= nudIntegralMultiplier_ValueChanged;
+            nudIntegralMultiplier.Value = IntegralMultiplier;
+            nudIntegralMultiplier.ValueChanged += nudIntegralMultiplier_ValueChanged;
+
+            nudDeadband.ValueChanged -= nudDeadband_ValueChanged;
+            nudDeadband.Value = Deadband;
+            nudDeadband.ValueChanged += nudDeadband_ValueChanged;
         }
+
+        
 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -70,6 +119,41 @@ namespace OpenGrade
             mf.vehicle.toolWidth = toolWidth;
             Properties.Vehicle.Default.setVehicle_toolWidth = toolWidth;
 
+            mf.vehicle.pwmGainUp = PwmGainUp;
+            Properties.Vehicle.Default.setVehicle_pwmGainUp = PwmGainUp;
+
+            mf.vehicle.pwmGainDown = PwmGainDown;
+            Properties.Vehicle.Default.setVehicle_pwmGainDown = PwmGainDown;
+
+            mf.vehicle.pwmMaxUp = PwmMaxUp;
+            Properties.Vehicle.Default.setVehicle_pwmMaxUp = PwmMaxUp;
+
+            mf.vehicle.pwmMaxDown = PwmMaxDown;
+            Properties.Vehicle.Default.setVehicle_pwmMaxDown = PwmMaxDown;
+
+            mf.vehicle.pwmMinUp = PwmMinUp;
+            Properties.Vehicle.Default.setVehicle_pwmMinUp = PwmMinUp;
+
+            mf.vehicle.pwmMinDown = PwmMinDown;
+            Properties.Vehicle.Default.setVehicle_pwmMinDown = PwmMinDown;
+
+            mf.vehicle.deadband = Deadband;
+            Properties.Vehicle.Default.setVehicle_deadband = Deadband;
+
+            mf.vehicle.integralMultiplier = IntegralMultiplier;
+            Properties.Vehicle.Default.setVehicle_integralMultiplier = IntegralMultiplier;
+
+          
+            mf.mc.relayRateSettings[mf.mc.rsPwmGainUp] = Properties.Vehicle.Default.setVehicle_pwmGainUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmGainDown] = Properties.Vehicle.Default.setVehicle_pwmGainDown;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMinUp] = Properties.Vehicle.Default.setVehicle_pwmMinUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMinDown] = Properties.Vehicle.Default.setVehicle_pwmMinDown;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMaxUp] = Properties.Vehicle.Default.setVehicle_pwmMaxUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMaxDown] = Properties.Vehicle.Default.setVehicle_pwmMaxDown;
+            mf.mc.relayRateSettings[mf.mc.rsIntegralMultiplier] = Properties.Vehicle.Default.setVehicle_integralMultiplier;
+            mf.mc.relayRateSettings[mf.mc.rsDeadband] = Properties.Vehicle.Default.setVehicle_deadband;
+            mf.RateRelaySettingsOutToPort();
+
             //Sections ------------------------------------------------------------------------------------------
 
             Properties.Settings.Default.Save();
@@ -82,7 +166,22 @@ namespace OpenGrade
 
         //don't save anything, leave the settings as before
         private void btnCancel_Click(object sender, EventArgs e)
-        { DialogResult = DialogResult.Cancel; Close(); }
+        { DialogResult = DialogResult.Cancel; Close();
+
+            //to reset the valves values if send button was pressed
+            mf.mc.relayRateSettings[mf.mc.rsPwmGainUp] = Properties.Vehicle.Default.setVehicle_pwmGainUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmGainDown] = Properties.Vehicle.Default.setVehicle_pwmGainDown;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMinUp] = Properties.Vehicle.Default.setVehicle_pwmMinUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMinDown] = Properties.Vehicle.Default.setVehicle_pwmMinDown;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMaxUp] = Properties.Vehicle.Default.setVehicle_pwmMaxUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMaxDown] = Properties.Vehicle.Default.setVehicle_pwmMaxDown;
+            mf.mc.relayRateSettings[mf.mc.rsIntegralMultiplier] = Properties.Vehicle.Default.setVehicle_integralMultiplier;
+            mf.mc.relayRateSettings[mf.mc.rsDeadband] = Properties.Vehicle.Default.setVehicle_deadband;
+            mf.RateRelaySettingsOutToPort();
+
+
+
+        }
 
         #region Vehicle //----------------------------------------------------------------
 
@@ -91,7 +190,22 @@ namespace OpenGrade
             antennaHeight = (double)nudAntennaHeight.Value * metImp2m;
         }
 
-         private void nudMinSlope_ValueChanged(object sender, EventArgs e)
+        private void bntValveSettingsSend_Click(object sender, EventArgs e)
+        {
+            
+            mf.mc.relayRateSettings[mf.mc.rsPwmGainUp] = PwmGainUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmGainDown] = PwmGainDown;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMinUp] = PwmMinUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMinDown] = PwmMinDown;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMaxUp] = PwmMaxUp;
+            mf.mc.relayRateSettings[mf.mc.rsPwmMaxDown] = PwmMaxDown;
+            mf.mc.relayRateSettings[mf.mc.rsIntegralMultiplier] = IntegralMultiplier;
+            mf.mc.relayRateSettings[mf.mc.rsDeadband] = Deadband;
+            mf.RateRelaySettingsOutToPort();
+
+        }
+
+        private void nudMinSlope_ValueChanged(object sender, EventArgs e)
         {
             minSlope = (double)nudMinSlope.Value;
         }
@@ -101,6 +215,50 @@ namespace OpenGrade
             toolWidth = (double)nudToolWidth.Value * metImp2m;
         }
 
-      #endregion Vehicle
+        #endregion Vehicle
+
+        #region Valve //--------------------------------------------------------------
+
+        private void nudPwmMinDown_ValueChanged(object sender, EventArgs e)
+        {
+            PwmMinDown = (byte)nudPwmMinDown.Value;
+        }
+
+        private void nudPwmMinUp_ValueChanged(object sender, EventArgs e)
+        {
+            PwmMinUp = (byte)nudPwmMinUp.Value;
+        }
+
+        private void nudPwmGainUp_ValueChanged(object sender, EventArgs e)
+        {
+            PwmGainUp = (byte)nudPwmGainUp.Value;
+        }
+
+        private void nudPwmGainDown_ValueChanged(object sender, EventArgs e)
+        {
+            PwmGainDown = (byte)nudPwmGainDown.Value;
+        }
+
+        private void nudPwmMaxDown_ValueChanged(object sender, EventArgs e)
+        {
+            PwmMaxDown = (byte)nudPwmMaxDown.Value;
+        }
+
+        private void nudPwmMaxUp_ValueChanged(object sender, EventArgs e)
+        {
+            PwmMaxUp = (byte)nudPwmMaxUp.Value;
+        }
+
+        private void nudIntegralMultiplier_ValueChanged(object sender, EventArgs e)
+        {
+            IntegralMultiplier = (byte)nudIntegralMultiplier.Value;
+        }
+
+        private void nudDeadband_ValueChanged(object sender, EventArgs e)
+        {
+            Deadband = (byte)nudDeadband.Value;
+        }
+
+        #endregion Valve
     }
 }
