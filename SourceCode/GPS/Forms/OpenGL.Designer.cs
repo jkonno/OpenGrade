@@ -606,7 +606,8 @@ namespace OpenGrade
             screen2FieldPt.northing = ((double)screenPt.Y) * (double)cameraDistanceZ / (openGLControlBack.Height * altitudeWindowGain);
             screen2FieldPt.northing += centerY;
 
-            stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + screen2FieldPt.northing.ToString("N3");
+            if (isMetric) stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + screen2FieldPt.northing.ToString("N3");
+            else stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + (screen2FieldPt.northing/.0254/12).ToString("N3");
 
             if (ct.isDrawingRefLine)
             {
@@ -697,7 +698,9 @@ namespace OpenGrade
 
                 centerX = (maxFieldX + minFieldX) / 2.0;
                 centerY = (maxFieldY + minFieldY) / 2.0;
-                stripMinMax.Text=minFieldY.ToString("N2") + ":" + maxFieldY.ToString("N2");
+
+                if (isMetric) stripMinMax.Text=minFieldY.ToString("N2") + ":" + maxFieldY.ToString("N2");
+                else stripMinMax.Text = (minFieldY/.0254/12).ToString("N2") + ":" + (maxFieldY/.0254/12).ToString("N2");
             }
         }
 
