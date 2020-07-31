@@ -941,9 +941,9 @@ namespace OpenGrade
             get
             {
                 if (pn.fixQuality == 0) return "Invalid";
-                else if (pn.fixQuality == 1) return "GPS fix";
-                else if (pn.fixQuality == 2) return "DGPS fix";
-                else if (pn.fixQuality == 3) return "PPS fix";
+                else if (pn.fixQuality == 1) return "GPS";
+                else if (pn.fixQuality == 2) return "DGPS";
+                else if (pn.fixQuality == 3) return "PPS";
                 else if (pn.fixQuality == 4) return "RTK fix";
                 else if (pn.fixQuality == 5) return "Flt RTK";
                 else if (pn.fixQuality == 6) return "Estimate";
@@ -1022,6 +1022,8 @@ namespace OpenGrade
 
             if (fiveSecondCounter++ > 100) { fiveSecondCounter = 0; }
 
+            //GPS Update rate
+            lblFixUpdateHz.Text = NMEAHz + " Hz " + FixQuality;
 
             //every half of a second update all status
             if (statusUpdateCounter > 4)
@@ -1087,6 +1089,8 @@ namespace OpenGrade
                 lblHeading.Text = Heading;
                 btnABLine.Text = PassNumber;
                 lblPureSteerAngle.Text = PureSteerAngle;
+
+                
 
                 if (cutDelta == 9999)
                 {

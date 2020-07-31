@@ -31,14 +31,16 @@
   int header = 0, tempHeader = 0, temp;
 
   //The variables used for storage
-  byte relayHi=0, relayLo = 0, cutValve = 100, plannedValveValue = 100;
+  byte relayHi=0, relayLo = 0, cutValve = 100;
 
   //workSwitch
   byte workSwitch = 0;
 
   //pwm variables
   byte pwmDrive = 0, pwmDisplay = 0, pwmGainUp = 5, pwmMinUp = 50, pwmGainDw = 5, pwmMinDw = 50, pwmMaxUp = 255, pwmMaxDw = 255, integralMultiplier = 20;
-  float pwmValue = 0;
+  int pwmValue = 0;
+  //int cutValue = 0;
+  int plannedValveValue = 0, pwmHist = 0, pwm1ago = 0, pwm2ago = 0, pwm3ago = 0, pwm4ago = 0, pwm5ago = 0;
 
 
   #define DIR_ENABLE 4 //PD4
@@ -99,7 +101,7 @@
       }
   
       //safety - turn off if confused
-      if (watchdogTimer > 10) cutValve = 99;
+      if (watchdogTimer > 10) cutValve = 100;
       
       //section relays
       SetRelays();
@@ -148,7 +150,7 @@
       pwmMinUp = Serial.read();
       pwmMinDw = Serial.read();
       pwmMaxUp = Serial.read();
-      pwmMinUp = Serial.read();
+      pwmMaxDw = Serial.read();
       integralMultiplier = Serial.read();
       deadband = Serial.read();
       
@@ -168,14 +170,7 @@
   {
     if (proportionalValve)
     {
-      if (cutValve > 102) {
-        digitalWrite(DIR_ENABLE, HIGH);
-        Serial.print("1,");
-      }
-      else{
-        digitalWrite(DIR_ENABLE, LOW); 
-        Serial.print("0,");
-      }
+     
   
       pwmValue = 0;
   
@@ -183,38 +178,39 @@
     {
     
 
-    if (cutValve > (100 + deadband))
+    if (cutValve >= (100 + deadband))
     {
-      if (plannedValveValue < cutValve)
-      {
-        pwmValue = ((cutValve - 100 - deadband)*pwmGainDw*(integralMultiplier/10) + pwmMinDw);
-      }
-      else
-      pwmValue = ((cutValve - 100 - deadband)*pwmGainDw + pwmMinDw);
-
-      if (pwmValue > pwmMaxDw)
-    {
-      pwmValue = pwmMaxDw;  
+      pwmValue = -((cutValve - 100 - deadband)*pwmGainDw + pwmMinDw);  
     }
+    if  (cutValve <= (100 - deadband))
+    {
+      pwmValue = -((cutValve - 100 + deadband)*pwmGainUp - pwmMinUp);
+    }
+
+  if (cutValve != 100 && pwmValue != 0) //if cutValve
+    {
+      pwmHist = ((((pwm1ago*0) + pwm2ago + (pwm3ago) + (pwm4ago*0) + (pwm5ago/8))*(sq(integralMultiplier)/100))/sq(cutValve-100));
+
+    pwmValue = (pwmValue - pwmHist);
+      
+    }
+
+  if (cutValve > 100 && pwmValue > 0) pwmValue = 0;
   
-    }
-    if  (cutValve < (100 - deadband))
-    {
-      if (plannedValveValue > cutValve)
-      {
-        pwmValue = -((cutValve - 100 + deadband)*pwmGainUp*(integralMultiplier/10) - pwmMinUp);
-      }
-      else
-      pwmValue = -((cutValve-100 + deadband)*pwmGainUp - pwmMinUp);
+  if (cutValve > 100 && pwmValue < -pwmMaxDw) pwmValue = -pwmMaxDw;
+  
+  if (cutValve < 100 && pwmValue < 0) pwmValue = 0;
+  
+  if (cutValve < 100 && pwmValue > pwmMaxUp) pwmValue = pwmMaxUp;
 
-      if (pwmValue > pwmMaxUp)
-    {
-      pwmValue = pwmMaxUp;  
-    }
-   
-    }
+  if (pwmValue > 0 && pwmValue < pwmMinUp) pwmValue = 0;
+  
+  if (pwmValue < 0 && pwmValue > -pwmMinDw) pwmValue = 0;
+  
+
+
     
-    pwmDrive = pwmValue;
+    pwmDrive = abs(pwmValue);
     plannedValveValue = cutValve;
     }
     else 
@@ -222,11 +218,39 @@
       pwmDrive = 0;
       plannedValveValue = 100;
     }
+
+  if (pwmValue < 0)
+      {
+        digitalWrite(DIR_ENABLE, HIGH);
+        Serial.print("1,");
+      }
+      else
+      {
+        digitalWrite(DIR_ENABLE, LOW); 
+        Serial.print("0,");
+      }
+
+
     
       analogWrite(PWM_OUT, pwmDrive);
-      if (pwmValue > 0) digitalWrite(LED_BUILTIN, HIGH);
+      if (pwmDrive > 0) digitalWrite(LED_BUILTIN, HIGH);
       else digitalWrite(LED_BUILTIN, LOW);
-      Serial.print(String((int)pwmValue)+",");
+      Serial.print(String((int)pwmDrive)+",");
+
+
+      pwm5ago = pwm4ago;
+      pwm4ago = pwm3ago;
+      pwm3ago = pwm2ago;
+      pwm2ago = pwm1ago;
+      pwm1ago = pwmValue;
+
+
+
+
+
+
+
+      
     } 
     else 
     {
