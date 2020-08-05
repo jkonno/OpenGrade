@@ -371,7 +371,7 @@
             resources.ApplyResources(this.nudIntegralMultiplier, "nudIntegralMultiplier");
             this.nudIntegralMultiplier.Name = "nudIntegralMultiplier";
             this.nudIntegralMultiplier.Value = new decimal(new int[] {
-            3,
+            40,
             0,
             0,
             0});

@@ -667,16 +667,16 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 352</value>
+    <value>23, 352</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 19</value>
+    <value>121, 19</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Integral Multiplier</value>
+    <value>OverShoot Red.</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
