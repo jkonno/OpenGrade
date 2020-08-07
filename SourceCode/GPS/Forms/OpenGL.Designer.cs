@@ -612,8 +612,12 @@ namespace OpenGrade
             }
             else
             {
-                if (isMetric) stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + screen2FieldPt.northing.ToString("N3") + ": " + ((screen2FieldPt.northing - ct.ptList[(int)(screen2FieldPt.easting)].altitude)*100).ToString("N1");
-                else stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + ((screen2FieldPt.northing) / .0254 / 12).ToString("N3") + ": " + ((screen2FieldPt.northing - ct.ptList[(int)(screen2FieldPt.easting)].altitude) / .0254).ToString("N1");
+                if (ct.ptList.Count > 0)
+                {
+                    if (isMetric) stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + screen2FieldPt.northing.ToString("N3") + ": " + ((screen2FieldPt.northing - ct.ptList[(int)(screen2FieldPt.easting)].altitude) * 100).ToString("N1");
+                    else stripTopoLocation.Text = ((int)(screen2FieldPt.easting)).ToString() + ": " + ((screen2FieldPt.northing) / .0254 / 12).ToString("N3") + ": " + ((screen2FieldPt.northing - ct.ptList[(int)(screen2FieldPt.easting)].altitude) / .0254).ToString("N1");
+                }
+                else stripTopoLocation.Text = " 0 " + ": " + " 0.000" + ": " + " 0.0";
             }
 
             if (ct.isDrawingRefLine)
