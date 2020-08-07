@@ -11,9 +11,9 @@ namespace OpenGrade
        //class variables
         private readonly FormGPS mf = null;
 
-        private double antennaHeight, minSlope, toolWidth;
+        private double antennaHeight, minSlope, toolWidth, viewDistUnderGnd, viewDistAboveGnd, gradeDistFromLine, maxCuttingDepth;
         private byte PwmGainUp, PwmGainDown, PwmMaxUp, PwmMaxDown, PwmMinUp, PwmMinDown, IntegralMultiplier, Deadband;
-        private readonly double metImp2m, m2MetImp;
+        private readonly double metImp2m, m2MetImp, metFt2m, m2metFt;
 
         //constructor
         public FormSettings(Form callingForm, int page)
@@ -26,12 +26,16 @@ namespace OpenGrade
             {
                 metImp2m = 0.01;
                 m2MetImp = 100.0;
+                metFt2m = 1;
+                m2metFt = 1;
                 lblInchesCm.Text = "Centimeters";
             }
             else
             {
                 metImp2m = glm.in2m;
                 m2MetImp = glm.m2in;
+                metFt2m = .3048;
+                m2metFt = (1 / .0254 / 12);
                 lblInchesCm.Text = "Inches";
             }
             //select the page as per calling menu or button from mainGPS form
@@ -45,6 +49,7 @@ namespace OpenGrade
             antennaHeight = Properties.Vehicle.Default.setVehicle_antennaHeight;
             toolWidth = Properties.Vehicle.Default.setVehicle_toolWidth;
             minSlope = Properties.Vehicle.Default.setVehicle_minSlope * 100;
+            maxCuttingDepth = Properties.Vehicle.Default.setVehicle_MaxCuttingDepth;
 
             nudAntennaHeight.ValueChanged -= nudAntennaHeight_ValueChanged;
             nudAntennaHeight.Value = (decimal)(antennaHeight * m2MetImp);
@@ -58,10 +63,11 @@ namespace OpenGrade
             nudMinSlope.Value = (decimal)(minSlope);
             nudMinSlope.ValueChanged += nudMinSlope_ValueChanged;
 
+            nudMaxCuttingDepth.ValueChanged -= nudMaxCuttingDepth_ValueChanged;
+            nudMaxCuttingDepth.Value = (decimal)(maxCuttingDepth * m2MetImp);
+            nudMaxCuttingDepth.ValueChanged += nudMaxCuttingDepth_ValueChanged;
+
             //Valve settings to what it is in the settings page------------------------------------------------
-            //PwmMinDown = Properties.Vehicle.Default.setVehicle_antennaHeight;
-            //toolWidth = Properties.Vehicle.Default.setVehicle_toolWidth;
-            //minSlope = Properties.Vehicle.Default.setVehicle_minSlope * 100;
 
             PwmMinUp = Properties.Vehicle.Default.setVehicle_pwmMinUp;
             PwmMinDown = Properties.Vehicle.Default.setVehicle_pwmMinDown;
@@ -103,9 +109,29 @@ namespace OpenGrade
             nudDeadband.ValueChanged -= nudDeadband_ValueChanged;
             nudDeadband.Value = Deadband;
             nudDeadband.ValueChanged += nudDeadband_ValueChanged;
+
+            //Display settings to what it is in the settings page------------------------------------------------
+
+            viewDistUnderGnd = Properties.Vehicle.Default.setVehicle_ViewDistUnderGnd;
+            viewDistAboveGnd = Properties.Vehicle.Default.setVehicle_ViewDistAboveGnd;
+            gradeDistFromLine = Properties.Vehicle.Default.setVehicle_GradeDistFromLine;
+
+            nudViewDistUnderGnd.ValueChanged -= nudViewDistUnderGnd_ValueChanged;
+            nudViewDistUnderGnd.Value = (decimal)(viewDistUnderGnd * m2MetImp);
+            nudViewDistUnderGnd.ValueChanged += nudViewDistUnderGnd_ValueChanged;
+
+            nudViewDistAboveGnd.ValueChanged -= nudViewDistAboveGnd_ValueChanged;
+            nudViewDistAboveGnd.Value = (decimal)(viewDistAboveGnd * m2MetImp);
+            nudViewDistAboveGnd.ValueChanged += nudViewDistAboveGnd_ValueChanged;
+
+            nudGradeDistFromLine.ValueChanged -= nudGradeDistFromLine_ValueChanged;
+            nudGradeDistFromLine.Value = (decimal)(gradeDistFromLine * m2metFt);
+            nudGradeDistFromLine.ValueChanged += nudGradeDistFromLine_ValueChanged;
+
+
         }
 
-        
+
 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -118,6 +144,22 @@ namespace OpenGrade
 
             mf.vehicle.toolWidth = toolWidth;
             Properties.Vehicle.Default.setVehicle_toolWidth = toolWidth;
+
+            mf.vehicle.maxCuttingDepth = maxCuttingDepth;
+            Properties.Vehicle.Default.setVehicle_MaxCuttingDepth = mf.vehicle.maxCuttingDepth;
+
+            //Display settings -------------------------------------------------------------------------------
+
+            mf.vehicle.viewDistUnderGnd = viewDistUnderGnd;
+            Properties.Vehicle.Default.setVehicle_ViewDistUnderGnd = mf.vehicle.viewDistUnderGnd;
+
+            mf.vehicle.viewDistAboveGnd = viewDistAboveGnd;
+            Properties.Vehicle.Default.setVehicle_ViewDistAboveGnd = mf.vehicle.viewDistAboveGnd;
+
+            mf.vehicle.gradeDistFromLine = gradeDistFromLine;
+            Properties.Vehicle.Default.setVehicle_GradeDistFromLine = mf.vehicle.gradeDistFromLine;
+
+            //Valve settings ---------------------------------------------------------------------------------
 
             mf.vehicle.pwmGainUp = PwmGainUp;
             Properties.Vehicle.Default.setVehicle_pwmGainUp = PwmGainUp;
@@ -158,6 +200,7 @@ namespace OpenGrade
 
             Properties.Settings.Default.Save();
             Properties.Vehicle.Default.Save();
+            //CalculateMinMaxZoom();
 
             //back to FormGPS
             DialogResult = DialogResult.OK;
@@ -215,6 +258,11 @@ namespace OpenGrade
             toolWidth = (double)nudToolWidth.Value * metImp2m;
         }
 
+        private void nudMaxCuttingDepth_ValueChanged(object sender, EventArgs e)
+        {
+            maxCuttingDepth = (double)nudMaxCuttingDepth.Value * metImp2m;
+        }
+
         #endregion Vehicle
 
         #region Valve //--------------------------------------------------------------
@@ -260,5 +308,28 @@ namespace OpenGrade
         }
 
         #endregion Valve
+
+        #region Display //----------------------------------------------------
+
+        private void nudViewDistUnderGnd_ValueChanged(object sender, EventArgs e)
+        {
+            viewDistUnderGnd = (double)nudViewDistUnderGnd.Value * metImp2m;
+            
+        }
+
+        private void nudViewDistAboveGnd_ValueChanged(object sender, EventArgs e)
+        {
+            viewDistAboveGnd = (double)nudViewDistAboveGnd.Value * metImp2m;
+            
+        }
+
+        private void nudGradeDistFromLine_ValueChanged(object sender, EventArgs e)
+        {
+            gradeDistFromLine = (double)nudGradeDistFromLine.Value * metFt2m;
+        }
+
+
+        #endregion Display
+
     }
 }

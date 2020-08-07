@@ -305,6 +305,7 @@ namespace OpenGrade
                 metricToolStrip.Checked = false;
                 imperialToolStrip.Checked = true;
             }
+            CalculateMinMaxZoom();
         }
         private void btnGPSData_Click(object sender, EventArgs e)
         {
@@ -623,6 +624,7 @@ namespace OpenGrade
             Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             lblSpeedUnits.Text = "kmh";
+            CalculateMinMaxZoom();
         }
         private void skyToolStripMenu_Click(object sender, EventArgs e)
         {
@@ -639,7 +641,7 @@ namespace OpenGrade
             Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             lblSpeedUnits.Text = "mph";
-
+            CalculateMinMaxZoom();
         }
         private void simulatorOnToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1172,10 +1174,6 @@ namespace OpenGrade
             //wait till timer fires again.     
         }
 
-        //public void RateRelayOutToPort() // par pat
-        //{  
-            
-            //throw new NotImplementedException(); // par pat
-        //}
+       
     }//end class
 }//end namespace

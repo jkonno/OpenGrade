@@ -88,6 +88,11 @@ namespace OpenGrade
                     writer.WriteLine("Integral Multiplier," + Properties.Vehicle.Default.setVehicle_integralMultiplier.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("Deadband," + Properties.Vehicle.Default.setVehicle_deadband.ToString(CultureInfo.InvariantCulture));
 
+                    writer.WriteLine("ViewDistUnderGnd," + Properties.Vehicle.Default.setVehicle_ViewDistUnderGnd.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("ViewDistAboveGnd," + Properties.Vehicle.Default.setVehicle_ViewDistAboveGnd.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("GradeDistFromLine," + Properties.Vehicle.Default.setVehicle_GradeDistFromLine.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("MaxCuttingDepth," + Properties.Vehicle.Default.setVehicle_MaxCuttingDepth.ToString(CultureInfo.InvariantCulture));
+
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
@@ -244,6 +249,16 @@ namespace OpenGrade
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Vehicle.Default.setVehicle_deadband = byte.Parse(words[1], CultureInfo.InvariantCulture);
 
+                        line = reader.ReadLine(); words = line.Split(',');
+                        Properties.Vehicle.Default.setVehicle_ViewDistUnderGnd = double.Parse(words[1], CultureInfo.InvariantCulture);
+                        line = reader.ReadLine(); words = line.Split(',');
+                        Properties.Vehicle.Default.setVehicle_ViewDistAboveGnd = double.Parse(words[1], CultureInfo.InvariantCulture);
+                        line = reader.ReadLine(); words = line.Split(',');
+                        Properties.Vehicle.Default.setVehicle_GradeDistFromLine = double.Parse(words[1], CultureInfo.InvariantCulture);
+                        line = reader.ReadLine(); words = line.Split(',');
+                        Properties.Vehicle.Default.setVehicle_MaxCuttingDepth = double.Parse(words[1], CultureInfo.InvariantCulture);
+
+
                         line = reader.ReadLine();
                         line = reader.ReadLine();
                         line = reader.ReadLine();
@@ -268,6 +283,22 @@ namespace OpenGrade
 
                         vehicle.toolWidth = Properties.Vehicle.Default.setVehicle_toolWidth;
                         vehicle.minSlope = Properties.Vehicle.Default.setVehicle_minSlope;
+
+                        vehicle.viewDistUnderGnd = Properties.Vehicle.Default.setVehicle_ViewDistUnderGnd;
+                        vehicle.viewDistAboveGnd = Properties.Vehicle.Default.setVehicle_ViewDistAboveGnd;
+                        vehicle.gradeDistFromLine = Properties.Vehicle.Default.setVehicle_GradeDistFromLine;
+                        vehicle.maxCuttingDepth = Properties.Vehicle.Default.setVehicle_MaxCuttingDepth;
+
+                        //Valve settings
+
+                        vehicle.pwmGainUp = Properties.Vehicle.Default.setVehicle_pwmGainUp;
+                        vehicle.pwmGainDown = Properties.Vehicle.Default.setVehicle_pwmGainDown;
+                        vehicle.pwmMinUp = Properties.Vehicle.Default.setVehicle_pwmMinUp;
+                        vehicle.pwmMinDown = Properties.Vehicle.Default.setVehicle_pwmMinDown;
+                        vehicle.pwmMaxUp = Properties.Vehicle.Default.setVehicle_pwmMaxUp;
+                        vehicle.pwmMaxDown = Properties.Vehicle.Default.setVehicle_pwmMaxDown;
+                        vehicle.integralMultiplier = Properties.Vehicle.Default.setVehicle_integralMultiplier;
+                        vehicle.deadband = Properties.Vehicle.Default.setVehicle_deadband;
 
                         vehicle.maxAngularVelocity = Properties.Vehicle.Default.setVehicle_maxAngularVelocity;
                         vehicle.maxSteerAngle = Properties.Vehicle.Default.setVehicle_maxSteerAngle;

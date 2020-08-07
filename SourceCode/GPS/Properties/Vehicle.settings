@@ -50,5 +50,17 @@
     <Setting Name="setVehicle_deadband" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="setVehicle_ViewDistUnderGnd" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="setVehicle_ViewDistAboveGnd" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="setVehicle_GradeDistFromLine" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="setVehicle_MaxCuttingDepth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

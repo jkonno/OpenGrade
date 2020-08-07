@@ -87,12 +87,12 @@
             this.toolStripDropDownBtnFuncs = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolstripField = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripResetTrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripEqWidth = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolstripUDPConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripUSBPortsConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripVehicleConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripAutoSteerConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripEqWidth = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripTopoLocation = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripOnlineGPS = new System.Windows.Forms.ToolStripProgressBar();
             this.stripOnlineAutoSteer = new System.Windows.Forms.ToolStripProgressBar();
@@ -623,8 +623,8 @@
             this.btnHideTabs,
             this.stripDistance,
             this.toolStripDropDownBtnFuncs,
-            this.stripEqWidth,
             this.toolStripDropDownButton2,
+            this.stripEqWidth,
             this.stripTopoLocation,
             this.stripOnlineGPS,
             this.stripOnlineAutoSteer});
@@ -707,18 +707,6 @@
             this.toolstripResetTrip.Text = ">0< Trip";
             this.toolstripResetTrip.Click += new System.EventHandler(this.toolstripResetTrip_Click_1);
             // 
-            // stripEqWidth
-            // 
-            this.stripEqWidth.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stripEqWidth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.stripEqWidth.Font = new System.Drawing.Font("Tahoma", 18F);
-            this.stripEqWidth.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.stripEqWidth.Margin = new System.Windows.Forms.Padding(0);
-            this.stripEqWidth.Name = "stripEqWidth";
-            this.stripEqWidth.Size = new System.Drawing.Size(586, 41);
-            this.stripEqWidth.Spring = true;
-            this.stripEqWidth.Text = "Width";
-            // 
             // toolStripDropDownButton2
             // 
             this.toolStripDropDownButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -783,14 +771,27 @@
             this.toolstripAutoSteerConfig.Text = "Auto Steer";
             this.toolstripAutoSteerConfig.Click += new System.EventHandler(this.toolstripAutoSteerConfig_Click);
             // 
+            // stripEqWidth
+            // 
+            this.stripEqWidth.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.stripEqWidth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.stripEqWidth.Font = new System.Drawing.Font("Tahoma", 18F);
+            this.stripEqWidth.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.stripEqWidth.Margin = new System.Windows.Forms.Padding(0);
+            this.stripEqWidth.Name = "stripEqWidth";
+            this.stripEqWidth.Size = new System.Drawing.Size(436, 41);
+            this.stripEqWidth.Spring = true;
+            this.stripEqWidth.Text = "Width";
+            // 
             // stripTopoLocation
             // 
             this.stripTopoLocation.AutoSize = false;
             this.stripTopoLocation.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stripTopoLocation.Margin = new System.Windows.Forms.Padding(-4, 0, 0, 0);
             this.stripTopoLocation.Name = "stripTopoLocation";
-            this.stripTopoLocation.Size = new System.Drawing.Size(200, 41);
-            this.stripTopoLocation.Text = "-- : -----";
+            this.stripTopoLocation.Size = new System.Drawing.Size(350, 41);
+            this.stripTopoLocation.Text = "-- : ----- : -----";
+            this.stripTopoLocation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // stripOnlineGPS
             // 

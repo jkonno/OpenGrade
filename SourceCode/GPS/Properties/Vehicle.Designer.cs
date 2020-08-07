@@ -214,5 +214,53 @@ namespace OpenGrade.Properties {
                 this["setVehicle_deadband"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double setVehicle_ViewDistUnderGnd {
+            get {
+                return ((double)(this["setVehicle_ViewDistUnderGnd"]));
+            }
+            set {
+                this["setVehicle_ViewDistUnderGnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double setVehicle_ViewDistAboveGnd {
+            get {
+                return ((double)(this["setVehicle_ViewDistAboveGnd"]));
+            }
+            set {
+                this["setVehicle_ViewDistAboveGnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public double setVehicle_GradeDistFromLine {
+            get {
+                return ((double)(this["setVehicle_GradeDistFromLine"]));
+            }
+            set {
+                this["setVehicle_GradeDistFromLine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double setVehicle_MaxCuttingDepth {
+            get {
+                return ((double)(this["setVehicle_MaxCuttingDepth"]));
+            }
+            set {
+                this["setVehicle_MaxCuttingDepth"] = value;
+            }
+        }
     }
 }
